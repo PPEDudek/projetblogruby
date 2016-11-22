@@ -1,0 +1,24 @@
+= form_for [:admin, @post] do |f|
+  - if @post.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@post.errors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - @post.errors.full_messages.each do |message|
+          %li= message
+  .row
+    .col-xs-8.col-xs-offset-2
+      .input-field
+        = f.label :title
+        = f.text_field :title, placeholder: 'Titre'
+      .input-field
+        = f.label :content
+        = f.text_area :content, :class => 'materialize-textarea'
+      .input-field
+        = f.label :category_id
+        %select{name: 'post[category_id]'}
+          - Category.all.each do |cat|
+            %option{value: cat.id}= cat.name
+      .actions
+        = f.submit 'Envoyer', :class => 'waves-effect waves-light btn'

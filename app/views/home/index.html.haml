@@ -1,0 +1,17 @@
+%h3= "Bonjour"
+.row
+  .col-xs-8
+    - @posts.each do |post|
+      .row
+        .col-xs-6
+          %h1= post.title
+        .col-xs-6
+          %h2= post.author
+        %br/
+        .col-xs-12
+          %h3= post.content
+  .col-xs-4
+    - @categories.each do |category|
+      .row
+        .col-xs-12
+          %h3= link_to "#{category.name}", root_path(category_id: category.id)
